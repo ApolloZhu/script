@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+if hash swiftenv 2>/dev/null; then
+    echo "⚠️  Already has swiftenv, skipping..."
+    exit 0
+fi
+
+# Determine OS
+UNAME=`uname`;
+if [[ $UNAME == "Darwin" ]]; then
+    OS="macOS"
+else
+    if [[ $UNAME == "Linux" ]]; then
+        if ! hash git 2>/dev/null; then
+            echo "⚠️  Installing dependency..."
+            sudo apt-get install git
+        fi
+    else
+        echo "⚠️  Unsupported OS: $UNAME, skipping..."
+        exit 0
+    fi
+fi
+echo "🖥  Operating System: $OS";
+
+git clone https://github.com/kylef/swiftenv.git ~/.swiftenv
+swiftenv init -
+if [[ $? != 0 ]]; then 
+    echo "❌  swiftenv failed"
+    exit 1
+fi
+
+if [[ $OS == "macOS" ]]; then
+    echo 'export SWIFTENV_ROOT="$HOME/.swiftenv"' >> ~/.bash_profile
+    echo 'export PATH="$SWIFTENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(swiftenv init -)"' >> ~/.bash_profile
+else
+    echo 'export SWIFTENV_ROOT="$HOME/.swiftenv"' >> ~/.bashrc
+    echo 'export PATH="$SWIFTENV_ROOT/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(swiftenv init -)"' >> ~/.bashrc
+fi
+
+echo "✅ Done"
