@@ -22,12 +22,8 @@ else
 fi
 echo "🖥  Operating System: $OS";
 
+rm -rf ~/.swiftenv
 git clone https://github.com/kylef/swiftenv.git ~/.swiftenv
-swiftenv init -
-if [[ $? != 0 ]]; then 
-    echo "❌  swiftenv failed"
-    exit 1
-fi
 
 if [[ $OS == "macOS" ]]; then
     echo 'export SWIFTENV_ROOT="$HOME/.swiftenv"' >> ~/.bash_profile
@@ -39,4 +35,9 @@ else
     echo 'eval "$(swiftenv init -)"' >> ~/.bashrc
 fi
 
-echo "✅ Done"
+swiftenv init -
+if [[ $? != 0 ]]; then 
+    echo "❌  install failed"
+else
+    echo "✅ Done"
+fi
