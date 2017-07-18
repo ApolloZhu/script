@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+[[ "$UID" == 0 ]] || exec sudo -E bash "$0" "$@"
+
+echo "Backup current hosts file to /etc/hosts.bak"
+cp /etc/hosts /etc/hosts.bak
+
+echo "Fetching hosts from https://github.com/racaljk/hosts"
+echo "(Licensed under a CC BY-NC-SA 4.0 International License)"
+LINK="https://raw.githubusercontent.com/racaljk/hosts/master/hosts"
+# LINK="https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts"
+echo "# My Hosts Start
+$HOSTS
+255.255.255.255	broadcasthost
+# My Hosts End
+
+$(curl $LINK)
+" > /etc/hosts
+
+echo "${HOSTS:?
+⚠️  You can set additional redirects as environment variable HOSTS
+✅ Done}
+has been inserted to the start of the hosts file.
+✅ Done"

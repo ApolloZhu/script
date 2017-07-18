@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+[[ "$UID" == 0 ]] || exec sudo -E bash "$0" "$@"
+
+if [[ -e "/etc/hosts.bak" ]]; then
+    echo "Restoring from backup"
+    mv /etc/hosts.bak /etc/hosts
+else
+    echo "Reset to system default"
+    echo "##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+$HOSTS" > /etc/hosts
+    echo "${HOSTS:?
+⚠️  You can set additional redirects as environment variable HOSTS
+✅ Done}
+has been appended to the end of the hosts file."
+fi
+
+echo "✅ Done"
