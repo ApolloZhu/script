@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[[ "$UID" == 0 ]] || exec sudo -E bash "$0" "$@"
+sudo echo "Trying to recover hosts file..."
 
 if [[ -e "/etc/hosts.bak" ]]; then
     echo "Restoring from backup"

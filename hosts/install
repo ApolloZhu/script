@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-[[ "$UID" == 0 ]] || exec sudo -E bash "$0" "$@"
-
-echo "Backup current hosts file to /etc/hosts.bak"
+sudo echo "Backup current hosts file to /etc/hosts.bak"
 cp /etc/hosts /etc/hosts.bak
 
 echo "Fetching hosts from https://github.com/racaljk/hosts"
