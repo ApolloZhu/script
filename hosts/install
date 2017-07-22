@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-
-sudo echo "Backup current hosts file to /etc/hosts.bak"
-cp /etc/hosts /etc/hosts.bak
+if [[ -e "/etc/hosts.bak" ]]; then
+    echo "Backup already exists"
+else
+    echo "Backup current hosts file to /etc/hosts.bak"
+    sudo cp /etc/hosts /etc/hosts.bak
+fi
 
 echo "Fetching hosts from https://github.com/racaljk/hosts"
 echo "(Licensed under a CC BY-NC-SA 4.0 International License)"
@@ -13,7 +16,7 @@ $HOSTS
 # My Hosts End
 
 $(curl $LINK)
-" > /etc/hosts
+" | sudo tee /etc/hosts
 
 echo "${HOSTS:?
 ⚠️  You can set additional redirects as environment variable HOSTS

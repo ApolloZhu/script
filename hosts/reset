@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-sudo echo "Trying to recover hosts file..."
-
 if [[ -e "/etc/hosts.bak" ]]; then
     echo "Restoring from backup"
-    mv /etc/hosts.bak /etc/hosts
+    sudo mv /etc/hosts.bak /etc/hosts
 else
     echo "Reset to system default"
     echo "##
@@ -16,7 +14,7 @@ else
 127.0.0.1	localhost
 255.255.255.255	broadcasthost
 ::1             localhost
-$HOSTS" > /etc/hosts
+$HOSTS" | sudo tee /etc/hosts
     echo "${HOSTS:?
 ⚠️  You can set additional redirects as environment variable HOSTS
 ✅ Done}
