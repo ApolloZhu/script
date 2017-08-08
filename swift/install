@@ -3,7 +3,7 @@
 # (which was stolen from vapor).
 
 VERSION="4.0"
-DATE="2017-07-11"
+DATE="2017-08-04"
 
 echo "Ubuntu Swift $VERSION ($DATE) Development Snapshot Installer";
 
@@ -29,6 +29,7 @@ echo "🖥  Operating System: $OS";
 
 if [[ $OS != "macOS" ]]; then
     echo "📚 Installing Dependencies"
+    apt-get install -y clang libicu-dev
     sudo apt-get install -y clang libicu-dev
 
     echo "🐦 Installing Swift"
