@@ -29,8 +29,10 @@ echo "🖥  Operating System: $OS";
 
 if [[ $OS != "macOS" ]]; then
     echo "📚 Installing Dependencies"
-    apt-get install -y clang libicu-dev
     sudo apt-get install -y clang libicu-dev
+    if [[ $? != 0 ]]; then
+        apt-get install -y clang libicu-dev
+    fi
 
     echo "🐦 Installing Swift"
     PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
