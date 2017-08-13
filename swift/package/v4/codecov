@@ -11,6 +11,7 @@ if [[ $UNAME != "Darwin" ]]; then
     exit 0
 fi
 
+echo "⚠️  Generating Xcode Project"
 PROJ_OUTPUT=`swift package generate-xcodeproj`
 PROJ_NAME="${PROJ_OUTPUT/generated: .\//}"
 SCHEME_NAME="${PROJ_NAME/.xcodeproj/}-Package"
