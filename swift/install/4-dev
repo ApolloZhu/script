@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
+# Modified based on github.com/onevcat/Swift-CI
+# (which was stolen from vapor).
 
-VERSION="3.1.1"
-echo "Ubuntu Swift $VERSION Release Installer"
+VERSION="4.0"
+DATE="2017-09-19"
+
+echo "Ubuntu Swift $VERSION ($DATE) Development Snapshot Installer"
 
 # Determine OS
 UNAME=`uname`;
@@ -31,7 +35,7 @@ if [[ $OS != "macOS" ]]; then
     fi
 
     echo "🐦 Installing Swift"
-    PREFIX="swift-$VERSION-RELEASE"
+    PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
     if [[ $OS == "ubuntu1610" ]]; then
         SWIFTFILE="$PREFIX-ubuntu16.10"
     elif [[ $OS == "ubuntu1604" ]]; then
@@ -39,7 +43,7 @@ if [[ $OS != "macOS" ]]; then
     else
         SWIFTFILE="$PREFIX-ubuntu14.04"
     fi
-    BINLINK="https://swift.org/builds/swift-$VERSION-release/$OS/$PREFIX/$SWIFTFILE.tar.gz"
+    BINLINK="https://swift.org/builds/swift-$VERSION-branch/$OS/$PREFIX/$SWIFTFILE.tar.gz"
     if hash swiftenv 2>/dev/null; then
         echo "⚠️  Using swiftenv"
         swiftenv install $BINLINK
@@ -52,4 +56,4 @@ if [[ $OS != "macOS" ]]; then
     fi
 fi
 
-echo "📅 Version: `swift --version`"
+echo "📅  Version: `swift --version`"
