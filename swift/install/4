@@ -4,12 +4,12 @@ VERSION="4.0"
 echo "Ubuntu Swift $VERSION Release Installer"
 
 # Determine OS
-UNAME=`uname`;
+UNAME=`uname`
 if [[ $UNAME == "Darwin" ]]; then
     OS="macOS"
 else
     if [[ $UNAME == "Linux" ]]; then
-        UBUNTU_RELEASE=`lsb_release -a 2>/dev/null`;
+        UBUNTU_RELEASE=`lsb_release -a 2>/dev/null`
         if [[ $UBUNTU_RELEASE == *"16.10"* ]]; then
             OS="ubuntu1610"
         elif [[ $UBUNTU_RELEASE == *"16.04"* ]]; then
@@ -21,7 +21,7 @@ else
         echo "Unsupported Operating System: $UNAME"
     fi
 fi
-echo "🖥  Operating System: $OS";
+echo "🖥  Operating System: $OS"
 
 if [[ $OS != "macOS" ]]; then
     echo "📚 Installing Dependencies"
