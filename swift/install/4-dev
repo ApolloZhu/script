@@ -2,8 +2,8 @@
 # Modified based on github.com/onevcat/Swift-CI
 # (which was stolen from vapor).
 
-VERSION="4.0"
-DATE="2017-09-19"
+VERSION="4.1"
+DATE="2017-12-12"
 
 echo "Ubuntu Swift $VERSION ($DATE) Development Snapshot Installer"
 
