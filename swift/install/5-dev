@@ -32,7 +32,7 @@ PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
 if [[ $OS == "macOS" ]]; then
     echo "🐦 Installing Swift"
     SWIFTFILE="$PREFIX-osx.pkg"
-    BINLINK = "https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
+    BINLINK="https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
     if hash swiftenv 2>/dev/null; then
         echo "⚠️  Using swiftenv"
         swiftenv install $BINLINK
