@@ -27,7 +27,22 @@ else
 fi
 echo "🖥  Operating System: $OS"
 
-if [[ $OS != "macOS" ]]; then
+PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
+
+if [[ $OS == "macOS" ]]; then
+    echo "🐦 Installing Swift"
+    SWIFTFILE="$PREFIX-osx.pkg"
+    BINLINK = "https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
+    if hash swiftenv 2>/dev/null; then
+        echo "⚠️  Using swiftenv"
+        swiftenv install $BINLINK
+    else
+        curl $BINLINK
+        sudo installer -pkg $SWIFTFILE -target /
+        export TOOLCHAINS=swift
+        echo "✅ Done"
+    fi
+else
     echo "📚 Installing Dependencies"
     sudo apt-get install -y clang libicu-dev
     if [[ $? != 0 ]]; then
@@ -35,7 +50,6 @@ if [[ $OS != "macOS" ]]; then
     fi
 
     echo "🐦 Installing Swift"
-    PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
     if [[ $OS == "ubuntu1804" ]]; then
         SWIFTFILE="$PREFIX-ubuntu18.04"
     elif [[ $OS == "ubuntu1604" ]]; then
