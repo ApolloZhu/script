@@ -37,7 +37,7 @@ if [[ $OS == "macOS" ]]; then
         echo "⚠️  Using swiftenv"
         swiftenv install $BINLINK
     else
-        curl $BINLINK
+        curl -O $BINLINK
         sudo installer -pkg $SWIFTFILE -target /
         export TOOLCHAINS=swift
         echo "✅ Done"
