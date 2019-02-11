@@ -25,7 +25,7 @@ else
         echo "Unsupported Operating System: $UNAME"
     fi
 fi
-echo "🖥  Operating System: $OS"
+echo "🖥 Operating System: $OS"
 
 PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
 
@@ -34,7 +34,7 @@ if [[ $OS == "macOS" ]]; then
     SWIFTFILE="$PREFIX-osx.pkg"
     BINLINK="https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
     if hash swiftenv 2>/dev/null; then
-        echo "⚠️  Using swiftenv"
+        echo "⚠️ Using swiftenv"
         swiftenv install $BINLINK
     else
         curl -O $BINLINK
@@ -59,7 +59,7 @@ else
     fi
     BINLINK="https://swift.org/builds/swift-$VERSION-branch/$OS/$PREFIX/$SWIFTFILE.tar.gz"
     if hash swiftenv 2>/dev/null; then
-        echo "⚠️  Using swiftenv"
+        echo "⚠️ Using swiftenv"
         swiftenv install $BINLINK
     else
         wget $BINLINK
@@ -70,4 +70,4 @@ else
     fi
 fi
 
-echo "📅  Version: `swift --version`"
+echo "📅 Version: `swift --version`"
