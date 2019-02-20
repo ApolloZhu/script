@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="4.2"
+VERSION="4.2.2"
 echo "Ubuntu Swift $VERSION Release Installer"
 
 # Determine OS
@@ -21,7 +21,7 @@ else
         echo "Unsupported Operating System: $UNAME"
     fi
 fi
-echo "🖥  Operating System: $OS"
+echo "🖥 Operating System: $OS"
 
 if [[ $OS != "macOS" ]]; then
     echo "📚 Installing Dependencies"
@@ -41,7 +41,7 @@ if [[ $OS != "macOS" ]]; then
     fi
     BINLINK="https://swift.org/builds/swift-$VERSION-release/$OS/$PREFIX/$SWIFTFILE.tar.gz"
     if hash swiftenv 2>/dev/null; then
-        echo "⚠️  Using swiftenv"
+        echo "⚠️ Using swiftenv"
         swiftenv install $BINLINK
     else
         wget $BINLINK
