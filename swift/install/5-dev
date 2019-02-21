@@ -3,7 +3,7 @@
 # (which was stolen from vapor).
 
 VERSION="5.0"
-DATE="2019-02-06"
+DATE="2019-02-19"
 
 echo "Ubuntu Swift $VERSION ($DATE) Development Snapshot Installer"
 
