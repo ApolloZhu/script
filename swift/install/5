@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
-# Modified based on github.com/onevcat/Swift-CI
-# (which was stolen from vapor).
 
 VERSION="5.0"
-DATE="2019-03-24"
-
-echo "Ubuntu Swift $VERSION ($DATE) Development Snapshot Installer"
+echo "Swift $VERSION Release Installer"
 
 # Determine OS
 UNAME=`uname`
@@ -27,20 +23,24 @@ else
 fi
 echo "🖥 Operating System: $OS"
 
-PREFIX="swift-$VERSION-DEVELOPMENT-SNAPSHOT-$DATE-a"
+PREFIX="swift-$VERSION-RELEASE"
 
 if [[ $OS == "macOS" ]]; then
-    echo "🐦 Installing Swift"
-    SWIFTFILE="$PREFIX-osx.pkg"
-    BINLINK="https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
-    if hash swiftenv 2>/dev/null; then
-        echo "⚠️ Using swiftenv"
-        swiftenv install $BINLINK
+    if [[ "`swift --version`" == *" $VERSION "* ]]; then
+        echo "🔨 Swift $VERSION is Currently Enabled Already"
     else
-        curl -O $BINLINK
-        sudo installer -pkg $SWIFTFILE -target /
-        export TOOLCHAINS=swift
-        echo "✅ Done"
+        echo "🐦 Installing Swift"
+        SWIFTFILE="$PREFIX-osx.pkg"
+        BINLINK="https://swift.org/builds/swift-$VERSION-branch/xcode/$PREFIX/$SWIFTFILE"
+        if hash swiftenv 2>/dev/null; then
+            echo "⚠️ Using swiftenv"
+            swiftenv install $BINLINK
+        else
+            curl -O $BINLINK
+            sudo installer -pkg $SWIFTFILE -target /
+            export TOOLCHAINS=swift
+            echo "✅ Done"
+        fi
     fi
 else
     echo "📚 Installing Dependencies"
@@ -57,7 +57,7 @@ else
     else
         SWIFTFILE="$PREFIX-ubuntu14.04"
     fi
-    BINLINK="https://swift.org/builds/swift-$VERSION-branch/$OS/$PREFIX/$SWIFTFILE.tar.gz"
+    BINLINK="https://swift.org/builds/swift-$VERSION-release/$OS/$PREFIX/$SWIFTFILE.tar.gz"
     if hash swiftenv 2>/dev/null; then
         echo "⚠️ Using swiftenv"
         swiftenv install $BINLINK
